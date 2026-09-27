@@ -137,7 +137,7 @@ const DICT = {
     'paid.tub': 'Venkovní vířivka',
     'paid.tubNote': 'za den',
     'paid.breakfast': 'Snídaně',
-    'paid.breakfastNote': 'za osobu a noc',
+    'paid.breakfastNote': 'za osobu',
 
     'g.drone': 'Domeček z ptačí perspektivy za soumraku, vedle vířivka a ohniště',
     'g.bedWindows': 'Postel v rohu se dvěma velkými okny do luk',
@@ -290,7 +290,7 @@ const DICT = {
     'paid.tub': 'Außen-Whirlpool',
     'paid.tubNote': 'pro Tag',
     'paid.breakfast': 'Frühstück',
-    'paid.breakfastNote': 'pro Person und Nacht',
+    'paid.breakfastNote': 'pro Person',
 
     'g.drone': 'Das Haus aus der Vogelperspektive in der Dämmerung, daneben Whirlpool und Feuerstelle',
     'g.bedWindows': 'Bett in der Ecke mit zwei großen Fenstern zur Wiese',
@@ -442,7 +442,7 @@ const DICT = {
     'paid.tub': 'Outdoor hot tub',
     'paid.tubNote': 'per day',
     'paid.breakfast': 'Breakfast',
-    'paid.breakfastNote': 'per person and night',
+    'paid.breakfastNote': 'per person',
 
     'g.drone': 'The cabin from above at dusk, with the hot tub and fire pit beside it',
     'g.bedWindows': 'A bed in the corner with two large windows onto the meadow',

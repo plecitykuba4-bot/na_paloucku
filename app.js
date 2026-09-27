@@ -86,7 +86,7 @@ const MAX_NIGHTS = 5;
 const EXTRAS_PAID = [
   ['sauna', 'paid.sauna', 'paid.saunaNote', 1400, 'once'],
   ['virivka', 'paid.tub', 'paid.tubNote', 700, 'night'],
-  ['snidane', 'paid.breakfast', 'paid.breakfastNote', 250, 'person-night'],
+  ['snidane', 'paid.breakfast', 'paid.breakfastNote', 250, 'person'],
 ];
 
 /** Místní poplatek z pobytu, za každý započatý den na osobu. */
@@ -504,8 +504,15 @@ function mountBooking() {
 
     for (const [id, label, note, price, per] of EXTRAS_PAID) {
       if (!picked.has(id)) continue;
-      const qty = per === 'once' ? 1 : per === 'night' ? count : count * guests;
-      rows.push({ label: `${t(label)} (${t(note)})`, sum: price * qty, qty });
+      // 'once' = jednou za pobyt, 'night' = za každou noc,
+      // 'person' = za každou osobu (ne za osobu a noc — snídaně se platí
+      // jednou na hlavu, ne každé ráno zvlášť).
+      const qty = per === 'once' ? 1 : per === 'night' ? count : guests;
+      rows.push({
+        label: qty > 1 ? `${t(label)} · ${qty} × ${money(price)}` : t(label),
+        sum: price * qty,
+        qty,
+      });
     }
 
     const tax = CITY_TAX * count * guests;
