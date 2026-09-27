@@ -1,0 +1,1330 @@
+@import url('assets/font/fonts.css');
+
+/* ============================================================
+   TOKENY.
+
+   Rytmus je vzatý z rozboru Airbnb v knihovně design-md: displej
+   v 500/600 místo tučných 700+, jedna značková barva na všech
+   primárních tlačítkách, měkké rohy všude a hlavně — nese to
+   fotografie a prostor, ne typografické svaly. Vzal jsem poměry,
+   ne jejich červenou.
+
+   Paleta je "Forest": hluboká zeleň, kostní bílá, teplé dřevo.
+   Béžová s mosazí je u prémiového bydlení nejohranější volba,
+   jakou lze udělat; tohle je jedna z doporučených náhrad a navíc
+   sedí na louku, les a dřevěný domeček z fotek.
+   ============================================================ */
+
+:root {
+  /* Plocha */
+  --canvas: #f6f4ef;
+  --surface: #fffefb;
+  --surface-soft: #eeeae1;
+  --surface-deep: #1c211d;
+
+  /* Text */
+  --ink: #1c211d;
+  --body: #49514a;
+  --muted: #7b837c;
+  --on-dark: #f6f4ef;
+  --on-dark-muted: #b9c1b8;
+
+  /* Linky */
+  --hairline: #e0dbd0;
+  --hairline-strong: #cfc8ba;
+
+  /* Jedna značková barva. Na primárních tlačítkách, na aktivním
+     dni v kalendáři a nikde jinde dekorativně. */
+  --accent: #2f4a35;
+  --accent-hover: #3d6045;
+  --accent-soft: #e4ebe3;
+  --on-accent: #f6f4ef;
+
+  /* Dřevo jako druhý tón, jen pro drobnosti */
+  --wood: #a9743f;
+
+  --font-display: 'Spectral', Georgia, serif;
+  --font-sans: 'Manrope', system-ui, sans-serif;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 22px;
+  --r-full: 999px;
+
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-plate: cubic-bezier(0.33, 0, 0, 1);
+  --shell: 1240px;
+  --gutter: clamp(20px, 4vw, 56px);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--canvas);
+  color: var(--body);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* `display` z třídy přebíjí atribut hidden — bez tohohle by se skrytý
+   formulář pod kalendářem ukazoval pořád. */
+[hidden] {
+  display: none !important;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.shell {
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Displej v 500/600, ne 700 — písmo tu nemá křičet. */
+.display {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+}
+
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+}
+
+.lede {
+  font-size: clamp(1rem, 0.94rem + 0.3vw, 1.125rem);
+  line-height: 1.7;
+  color: var(--body);
+  max-width: 62ch;
+}
+
+/* --- tlačítka: jedna barva, měkké rohy --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  min-height: 52px;
+  padding: 0 1.6rem;
+  border-radius: var(--r-full);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition:
+    background 0.25s var(--ease),
+    color 0.25s var(--ease),
+    border-color 0.25s var(--ease),
+    transform 0.15s var(--ease);
+}
+
+.btn:active {
+  transform: scale(0.985);
+}
+
+.btn--solid {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.btn--solid:hover {
+  background: var(--accent-hover);
+}
+
+.btn--ghost {
+  border: 1px solid rgb(246 244 239 / 0.55);
+  color: var(--on-dark);
+}
+
+.btn--ghost:hover {
+  background: rgb(246 244 239 / 0.14);
+  border-color: var(--on-dark);
+}
+
+.btn--line {
+  border: 1px solid var(--hairline-strong);
+  color: var(--ink);
+}
+
+.btn--line:hover {
+  border-color: var(--ink);
+}
+
+.btn[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ============================================================
+   HLAVIČKA
+   ============================================================ */
+
+.top {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 60;
+  transition:
+    background 0.4s var(--ease),
+    border-color 0.4s var(--ease);
+  border-bottom: 1px solid transparent;
+}
+
+.top[data-solid='true'] {
+  background: rgb(246 244 239 / 0.92);
+  backdrop-filter: blur(14px);
+  border-bottom-color: var(--hairline);
+}
+
+.top__in {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  min-height: 74px;
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.3rem;
+  letter-spacing: 0.01em;
+  color: var(--on-dark);
+  transition: color 0.4s var(--ease);
+}
+
+.top[data-solid='true'] .brand {
+  color: var(--ink);
+}
+
+.nav {
+  display: none;
+  gap: 2rem;
+  list-style: none;
+}
+
+@media (min-width: 900px) {
+  .nav {
+    display: flex;
+  }
+}
+
+.nav a {
+  font-size: 0.875rem;
+  color: var(--on-dark);
+  opacity: 0.85;
+  transition:
+    opacity 0.25s var(--ease),
+    color 0.4s var(--ease);
+}
+
+.top[data-solid='true'] .nav a {
+  color: var(--body);
+}
+
+.nav a:hover {
+  opacity: 1;
+}
+
+.top .btn--solid {
+  min-height: 42px;
+  font-size: 0.875rem;
+}
+
+.top__end {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Přepínač jazyka. Tři úseky v jedné pilulce; aktivní podkládá jezdec,
+   který se mezi nimi posouvá — proto je to samostatný prvek a ne pozadí
+   tlačítka, které by jen přeblikávalo. */
+.langs {
+  position: relative;
+  display: none;
+  padding: 3px;
+  border-radius: var(--r-full);
+  border: 1px solid rgb(246 244 239 / 0.45);
+  transition: border-color 0.4s var(--ease);
+}
+
+@media (min-width: 560px) {
+  .langs {
+    display: flex;
+  }
+}
+
+.top[data-solid='true'] .langs {
+  border-color: var(--hairline-strong);
+}
+
+.langs__pill {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  border-radius: var(--r-full);
+  background: var(--accent);
+  transition:
+    transform 0.38s var(--ease-plate),
+    width 0.38s var(--ease-plate);
+  pointer-events: none;
+}
+
+.langs button {
+  position: relative;
+  z-index: 1;
+  min-width: 44px;
+  padding: 0.35rem 0.7rem;
+  border-radius: var(--r-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--on-dark);
+  opacity: 0.75;
+  transition:
+    color 0.3s var(--ease),
+    opacity 0.3s var(--ease);
+}
+
+.top[data-solid='true'] .langs button {
+  color: var(--body);
+}
+
+.langs button:hover {
+  opacity: 1;
+}
+
+.langs button[aria-pressed='true'],
+.top[data-solid='true'] .langs button[aria-pressed='true'] {
+  color: var(--on-accent);
+  opacity: 1;
+}
+
+/* ============================================================
+   HERO. Fotka přes celou plochu, která se po načtení sama
+   pomalu přiblíží a doklouže do klidu; při scrollu se vrací.
+   ============================================================ */
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  isolation: isolate;
+  /* Obsah na střed, vodorovně i svisle. */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-block: clamp(5rem, 12vh, 9rem);
+}
+
+.hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+}
+
+.hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 58%;
+  transform-origin: 50% 60%;
+  will-change: transform;
+}
+
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(to bottom, rgb(18 22 19 / 0.5) 0%, rgb(18 22 19 / 0.12) 34%, rgb(18 22 19 / 0.58) 78%, rgb(18 22 19 / 0.82) 100%);
+}
+
+/* Světelná čára. Pruh přes polovinu šířky, nakloněný o 8°, který jednou
+   za čtrnáct vteřin projede snímkem. Na jejich webu je zlatý; tady je
+   kostní, aby nepřinesl do palety čtvrtou barvu — na té louce to čte
+   jako projíždějící sluneční světlo. */
+.hero__sweep {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero__sweep::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: 0;
+  width: 50%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(246 244 239 / 0.1) 40%,
+    rgb(255 253 246 / 0.18) 50%,
+    rgb(246 244 239 / 0.1) 60%,
+    transparent 100%
+  );
+  transform: rotate(8deg) translateX(-120%);
+  animation: sweep 14s ease-in-out 3s infinite;
+}
+
+/* Náběh a odeznění průhlednosti, ne jen posun: bez nich čára naskočí
+   a zmizí na kraji snímku, což je vidět. */
+@keyframes sweep {
+  0% {
+    opacity: 0;
+    transform: rotate(8deg) translateX(-120%);
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(8deg) translateX(280%);
+  }
+}
+
+/* Prach nad loukou. Tečky stoupají odspodu, každá jinak dlouho
+   a s jiným zpožděním — pravidelnost by z toho udělala déšť pozpátku. */
+.hero__dust {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero__dust i {
+  position: absolute;
+  bottom: -8px;
+  border-radius: 50%;
+  background: rgb(246 244 239 / 0.85);
+  box-shadow: 0 0 6px rgb(246 244 239 / 0.55);
+  animation: dust linear infinite;
+  will-change: transform, opacity;
+}
+
+/* Tečka se objeví z nuly, cestou se zmenší a nahoře zmizí — jinak
+   vypadá jako kulička na provázku. */
+@keyframes dust {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) scale(0);
+  }
+  8% {
+    opacity: 1;
+    transform: translate3d(4px, -5svh, 0) scale(1);
+  }
+  90% {
+    opacity: 0.5;
+    transform: translate3d(var(--drift, 20px), -75svh, 0) scale(0.7);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--drift, 20px), calc(-100svh - 40px), 0) scale(0.5);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__sweep,
+  .hero__dust {
+    display: none;
+  }
+}
+
+.hero__in {
+  display: grid;
+  justify-items: center;
+  gap: clamp(1.25rem, 2.6vw, 2rem);
+  color: var(--on-dark);
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(3rem, 1.6rem + 6vw, 7rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  color: var(--on-dark);
+  max-width: 16ch;
+}
+
+.hero__sub {
+  font-size: clamp(1.05rem, 0.96rem + 0.4vw, 1.35rem);
+  color: rgb(246 244 239 / 0.86);
+  max-width: 44ch;
+}
+
+.hero__cta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+/* ============================================================
+   SEKCE
+   ============================================================ */
+
+.section {
+  padding-block: clamp(4.5rem, 9vw, 9rem);
+}
+
+.section--soft {
+  background: var(--surface-soft);
+}
+
+.section__head {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  max-width: 64ch;
+}
+
+.section__head h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2.1rem, 1.4rem + 2.6vw, 3.6rem);
+  line-height: 1.06;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+/* --- o domečku --- */
+.about {
+  display: grid;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .about {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.about__copy {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.about__media {
+  position: relative;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+}
+
+.about__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+}
+
+/* --- galerie --- */
+/* Galerie v zarovnaných řádcích.
+   Sloupcová sazba fotky nezkreslí, ale vyrovnává je podle toku obsahu,
+   takže každý sloupec končí jinde a dno je roztřepené. Mřížka zas ořezává
+   všechno na jeden tvar. Tohle je třetí cesta: řádek se dopočítá tak, aby
+   měl přesnou šířku kontejneru, a všechny fotky v něm stejnou výšku —
+   každá si přitom drží vlastní poměr. Rozdělení počítá skript. */
+.gallery {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap, 14px);
+}
+
+.gallery__row {
+  display: flex;
+  gap: var(--gap, 14px);
+}
+
+.gallery__item {
+  position: relative;
+  display: block;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  border-radius: var(--r-md);
+  background: var(--surface-soft);
+  cursor: pointer;
+  flex: none;
+}
+
+.gallery__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: translate3d(0, var(--drift, 0px), 0);
+  transition: transform 0.7s var(--ease-plate);
+}
+
+.gallery__item:hover img,
+.gallery__item:focus-visible img {
+  transform: translate3d(0, var(--drift, 0px), 0) scale(1.04);
+}
+
+.gallery__item:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* --- lightbox --- */
+.lb {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  padding: clamp(12px, 3vw, 40px);
+  background: rgb(18 22 19 / 0.93);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s var(--ease);
+}
+
+.lb[data-open='true'] {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.lb img {
+  max-width: 100%;
+  max-height: 84svh;
+  object-fit: contain;
+  border-radius: var(--r-md);
+}
+
+.lb__bar {
+  position: absolute;
+  inset-inline: 0;
+  bottom: clamp(12px, 3vw, 32px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  color: var(--on-dark);
+}
+
+.lb__nav,
+.lb__close {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: var(--r-full);
+  border: 1px solid rgb(246 244 239 / 0.35);
+  color: var(--on-dark);
+  transition: background 0.25s var(--ease);
+}
+
+.lb__nav:hover,
+.lb__close:hover {
+  background: rgb(246 244 239 / 0.16);
+}
+
+.lb__close {
+  position: absolute;
+  top: clamp(12px, 3vw, 28px);
+  right: clamp(12px, 3vw, 28px);
+}
+
+.lb__count {
+  font-size: 0.8125rem;
+  letter-spacing: 0.1em;
+  color: rgb(246 244 239 / 0.75);
+}
+
+/* --- vybavení ---
+   Ne dvanáct stejných kolonek: vířivka a dárkový poukaz nemají stejnou
+   váhu. Čtyři věci, které pobyt prodávají, dostanou fotku a místo;
+   zbytek je tichý seznam pod nimi. Fotografie nese sdělení, ne rámeček. */
+
+.feat {
+  display: grid;
+  gap: clamp(10px, 1.2vw, 18px);
+  grid-template-columns: 1fr;
+}
+
+.feat__item {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--r-md);
+  background: var(--surface-soft);
+  aspect-ratio: 4 / 3;
+  isolation: isolate;
+}
+
+.feat__item img {
+  position: absolute;
+  inset: -6% 0;
+  width: 100%;
+  height: 112%;
+  object-fit: cover;
+  transform: translate3d(0, var(--drift, 0px), 0);
+  transition: transform 0.8s var(--ease-plate);
+}
+
+.feat__item:hover img {
+  transform: translate3d(0, var(--drift, 0px), 0) scale(1.04);
+}
+
+/* Bez tohohle by bílý text na světlé části fotky zmizel. */
+.feat__item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgb(18 22 19 / 0.78) 0%, rgb(18 22 19 / 0.12) 46%, transparent 72%);
+}
+
+.feat__cap {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 1;
+  display: grid;
+  gap: 0.25rem;
+  padding: clamp(1rem, 2vw, 1.6rem);
+  color: var(--on-dark);
+}
+
+.feat__cap b {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.2rem, 1rem + 0.8vw, 1.7rem);
+  line-height: 1.1;
+}
+
+.feat__cap span {
+  font-size: 0.875rem;
+  color: rgb(246 244 239 / 0.82);
+}
+
+@media (min-width: 820px) {
+  /* Čtyři sloupce, dva řádky. Fotky na šířku berou dva sloupce a jeden
+     řádek, fotky na výšku jeden sloupec a dva řádky — mřížka se řídí
+     tvarem materiálu, ne naopak. Portrét nacpaný do pruhu na šířku
+     neukáže nic, což se přesně stalo koši u dveří. */
+  .feat {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .feat__item--wide {
+    grid-column: span 2;
+    aspect-ratio: 16 / 9;
+  }
+
+  .feat__item--tall {
+    grid-row: span 2;
+    aspect-ratio: auto;
+  }
+}
+
+.extras__lead {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+}
+
+.extras {
+  display: grid;
+  grid-template-columns: 1fr;
+  column-gap: clamp(2rem, 5vw, 5rem);
+}
+
+@media (min-width: 720px) {
+  .extras {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.extras__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  padding-block: 1rem;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.extras__row dt {
+  font-weight: 700;
+  font-size: 0.9375rem;
+  color: var(--ink);
+}
+
+.extras__row dd {
+  font-size: 0.875rem;
+  color: var(--muted);
+  text-align: right;
+}
+
+/* ============================================================
+   REZERVACE
+   ============================================================ */
+
+.book {
+  display: grid;
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+  align-items: start;
+}
+
+@media (min-width: 1000px) {
+  .book {
+    grid-template-columns: minmax(0, 1.5fr) minmax(320px, 1fr);
+  }
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.cal__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.cal__step {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-full);
+  border: 1px solid var(--hairline-strong);
+  transition:
+    background 0.25s var(--ease),
+    border-color 0.25s var(--ease);
+}
+
+.cal__step:hover:not([disabled]) {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
+
+.cal__months {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+@media (min-width: 680px) {
+  .cal__months {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.cal__name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: var(--ink);
+  text-align: center;
+  margin-bottom: 0.85rem;
+}
+
+.cal__dow,
+.cal__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.cal__dow {
+  margin-bottom: 0.35rem;
+}
+
+.cal__dow span {
+  text-align: center;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  padding-block: 0.35rem;
+}
+
+.cal__cell {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  display: grid;
+  place-items: center;
+}
+
+/* Vybraný rozsah je jeden souvislý pruh pod čísly, ne řada koleček.
+   Kreslí ho ::before buňky, takže mezi dny nevzniká mezera. */
+.cal__cell[data-in='true']::before,
+.cal__cell[data-edge]::before {
+  content: '';
+  position: absolute;
+  inset: 14% 0;
+  background: var(--accent-soft);
+}
+
+.cal__cell[data-edge='start']::before {
+  inset-inline-start: 50%;
+}
+
+.cal__cell[data-edge='end']::before {
+  inset-inline-end: 50%;
+}
+
+.cal__cell[data-edge='both']::before {
+  display: none;
+}
+
+.cal__day {
+  position: relative;
+  width: 86%;
+  aspect-ratio: 1 / 1;
+  /* Zaoblený čtverec, ne kolečko — sedí ke kartám na zbytku stránky
+     a odlišuje výběr od běžného hover kroužku. */
+  border-radius: var(--r-sm);
+  display: grid;
+  place-items: center;
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  transition:
+    background 0.22s var(--ease),
+    color 0.22s var(--ease),
+    box-shadow 0.22s var(--ease);
+}
+
+.cal__day:hover:not([disabled]) {
+  background: var(--accent-soft);
+}
+
+.cal__day[disabled] {
+  color: var(--hairline-strong);
+  cursor: not-allowed;
+}
+
+/* Krajní dny: plná barva a jemné vystoupení nad pruh. */
+.cal__cell[data-edge] .cal__day {
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 700;
+  box-shadow: 0 6px 16px -8px rgb(47 74 53 / 0.75);
+}
+
+/* Dny uvnitř rozsahu zůstávají čitelné, jen ztmavnou do akcentu. */
+.cal__cell[data-in='true'] .cal__day {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* --- příplatky v souhrnu --- */
+.sum__opts {
+  display: grid;
+  gap: 0.15rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.sum__opt {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: baseline;
+  gap: 0.65rem;
+  padding: 0.45rem 0;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.sum__opt input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.sum__opt b {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.sum__opt i {
+  font-style: normal;
+  color: var(--muted);
+  font-size: 0.8125rem;
+}
+
+.sum__opt em {
+  font-style: normal;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.sum__opt:hover b {
+  color: var(--accent);
+}
+
+/* --- ceník --- */
+.price {
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 4rem);
+}
+
+@media (min-width: 820px) {
+  .price {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.price__col h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.35rem;
+  color: var(--ink);
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--hairline-strong);
+}
+
+.price__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.35rem 1.5rem;
+  padding-block: 0.95rem;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.price__row dt {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.price__row dt small {
+  display: block;
+  font-weight: 400;
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
+.price__row dd {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.price__note {
+  margin-top: 1.25rem;
+  font-size: 0.875rem;
+  color: var(--accent);
+}
+
+/* --- souhrn --- */
+.sum {
+  position: sticky;
+  top: 96px;
+  display: grid;
+  gap: 1.1rem;
+}
+
+.sum__range {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 0.75rem;
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.sum__range span {
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+
+.sum__range b {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--ink);
+}
+
+.sum__arrow {
+  color: var(--hairline-strong);
+}
+
+.sum__rows {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.sum__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.875rem;
+}
+
+.sum__row span {
+  color: var(--muted);
+}
+
+.sum__row b {
+  font-weight: 500;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.sum__total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--hairline);
+}
+
+.sum__total span {
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
+.sum__total b {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 2.1rem;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.sum__empty {
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.sum__note {
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.field {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.field label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.field input,
+.field textarea,
+.field select {
+  font: inherit;
+  font-size: 0.9375rem;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--r-sm);
+  padding: 0.7rem 0.85rem;
+  transition: border-color 0.2s var(--ease);
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: var(--muted);
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.field--row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.form {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: 0.25rem;
+}
+
+.form__msg {
+  font-size: 0.875rem;
+  padding: 0.7rem 0.85rem;
+  border-radius: var(--r-sm);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+/* ============================================================
+   KONTAKT A PATA
+   ============================================================ */
+
+.contact {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+@media (min-width: 900px) {
+  .contact {
+    grid-template-columns: 1.15fr 1fr;
+  }
+}
+
+.contact__map {
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  border: 1px solid var(--hairline);
+  min-height: 340px;
+  background: var(--surface-soft);
+}
+
+.contact__map iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 340px;
+  border: 0;
+}
+
+.contact__rows {
+  display: grid;
+  align-content: start;
+}
+
+.contact__row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+  padding-block: 1.1rem;
+  border-bottom: 1px solid var(--hairline);
+  font-size: 0.9375rem;
+}
+
+.contact__row dt {
+  color: var(--muted);
+}
+
+.contact__row dd {
+  color: var(--ink);
+  text-align: right;
+}
+
+.contact__row a:hover {
+  color: var(--accent);
+}
+
+.foot {
+  background: var(--surface-deep);
+  color: var(--on-dark-muted);
+  padding-block: clamp(2.5rem, 5vw, 4rem);
+}
+
+.foot__in {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8125rem;
+}
+
+.foot .brand {
+  color: var(--on-dark);
+}
+
+/* ============================================================
+   NÁSTUP. Prvky čekají skryté a motor je pustí, až vjedou
+   do okna. Kdo si vypnul animace, uvidí je rovnou.
+   ============================================================ */
+
+[data-rise],
+[data-stagger] > * {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  [data-rise],
+  [data-stagger] > * {
+    opacity: 1;
+  }
+  .hero__media img {
+    transform: none !important;
+  }
+}

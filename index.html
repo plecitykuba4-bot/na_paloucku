@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Na paloučku — dřevěný domeček s vířivkou, Podkozí</title>
+    <meta
+      name="description"
+      content="Útulný dřevěný domeček až pro 4 osoby s venkovní vířivkou a privátní saunou. Podkozí u Křivoklátska, kousek od Berounky."
+    />
+    <meta property="og:title" content="Na paloučku — dřevěný domeček s vířivkou" />
+    <meta property="og:description" content="Ubytování pro čtyři uprostřed louky. Vířivka pod hvězdami, sauna, ohniště." />
+    <meta property="og:image" content="assets/img/hero-domecek.webp" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <a class="sr-only" href="#obsah" data-i18n="a11y.skip">Přeskočit na obsah</a>
+
+    <header class="top" data-top>
+      <div class="shell top__in">
+        <a class="brand" href="#">Na paloučku</a>
+        <nav data-i18n-attr="aria-label:a11y.nav" aria-label="Hlavní">
+          <ul class="nav">
+            <li><a href="#o-domecku" data-i18n="nav.about">O domečku</a></li>
+            <li><a href="#galerie" data-i18n="nav.gallery">Galerie</a></li>
+            <li><a href="#vybaveni" data-i18n="nav.kit">Vybavení</a></li>
+            <li><a href="#cenik" data-i18n="nav.price">Ceník</a></li>
+            <li><a href="#rezervace" data-i18n="nav.book">Rezervace</a></li>
+            <li><a href="#kontakt" data-i18n="nav.contact">Kontakt</a></li>
+          </ul>
+        </nav>
+        <div class="top__end">
+          <div class="langs" role="group" data-i18n-attr="aria-label:a11y.lang" aria-label="Jazyk">
+            <span class="langs__pill" data-lang-pill aria-hidden="true"></span>
+            <button type="button" data-lang-btn="cs" aria-pressed="true">CZ</button>
+            <button type="button" data-lang-btn="de" aria-pressed="false">DE</button>
+            <button type="button" data-lang-btn="en" aria-pressed="false">EN</button>
+          </div>
+          <a class="btn btn--solid" href="#rezervace" data-i18n="nav.cta">Rezervovat</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="obsah">
+      <!-- ========== HERO ========== -->
+      <section class="hero">
+        <div class="hero__media">
+          <img
+            src="assets/img/hero-domecek.webp"
+            alt="Dřevěný domeček Na paloučku s terasou, za plotem louka a stromy"
+            fetchpriority="high"
+            data-hero-img
+            data-i18n-attr="alt:hero.alt"
+          />
+        </div>
+        <div class="hero__scrim"></div>
+        <div class="hero__sweep" aria-hidden="true"></div>
+        <div class="hero__dust" data-dust aria-hidden="true"></div>
+
+        <div class="shell hero__in">
+          <h1 data-rise>Na paloučku</h1>
+          <p class="hero__sub" data-rise data-i18n="hero.sub">
+            Dřevěný domeček pro čtyři uprostřed louky. Vířivka pod hvězdami, privátní sauna
+            a ohniště na zahradě.
+          </p>
+          <div class="hero__cta" data-rise>
+            <a class="btn btn--solid" href="#rezervace" data-i18n="hero.book">Rezervovat pobyt</a>
+            <a class="btn btn--ghost" href="#galerie" data-i18n="hero.gallery">Prohlédnout galerii</a>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========== O DOMEČKU ========== -->
+      <section class="section" id="o-domecku">
+        <div class="shell about">
+          <div class="about__copy">
+            <p class="eyebrow" data-rise data-i18n="about.eyebrow">O domečku</p>
+            <h2 class="display" style="font-size: clamp(2.1rem, 1.4rem + 2.6vw, 3.6rem)" data-rise data-i18n="about.title">
+              Malý dům, velká louka
+            </h2>
+            <p class="lede" data-rise data-i18n="about.p1">
+              Na paloučku je útulný dřevěný domeček až pro čtyři osoby s venkovní vířivkou
+              a možností pronajmutí privátní sauny. Uvnitř kamna na dřevo, spaní v podkroví
+              a okna do luk.
+            </p>
+            <p class="lede" data-rise data-i18n="about.p2">
+              V blízkosti najdete rodinnou restauraci Srub Podkozí. Na zahradě je ohniště
+              a k dostání jsou dárkové poukazy.
+            </p>
+            <p class="lede" data-rise data-i18n="about.p3">
+              Jsme na dosah od CHKO Křivoklátsko a povodí Berounky, s turistickými
+              i cyklistickými trasami hned za plotem.
+            </p>
+          </div>
+          <figure class="about__media" data-rise>
+            <img src="assets/img/virivka-zapad.webp" alt="Venkovní vířivka na dřevěné terase při západu slunce" loading="lazy" data-parallax />
+          </figure>
+        </div>
+      </section>
+
+      <!-- ========== GALERIE ========== -->
+      <section class="section section--soft" id="galerie">
+        <div class="shell">
+          <div class="section__head">
+            <p class="eyebrow" data-rise data-i18n="gallery.eyebrow">Galerie</p>
+            <h2 data-rise data-i18n="gallery.title">Jak to u nás vypadá</h2>
+          </div>
+          <div class="gallery" data-gallery></div>
+        </div>
+      </section>
+
+      <!-- ========== VYBAVENÍ ========== -->
+      <section class="section" id="vybaveni">
+        <div class="shell">
+          <div class="section__head">
+            <p class="eyebrow" data-rise data-i18n="kit.eyebrow">Vybavení</p>
+            <h2 data-rise data-i18n="kit.title">Co v domečku najdete</h2>
+          </div>
+          <div class="feat" data-feat></div>
+          <p class="extras__lead" data-rise data-i18n="kit.more">A k tomu</p>
+          <dl class="extras" data-extras></dl>
+        </div>
+      </section>
+
+      <!-- ========== CENÍK ========== -->
+      <section class="section" id="cenik">
+        <div class="shell">
+          <div class="section__head">
+            <p class="eyebrow" data-rise data-i18n="price.eyebrow">Ceník</p>
+            <h2 data-rise data-i18n="price.title">Kolik to stojí</h2>
+          </div>
+          <div class="price">
+            <div class="price__col" data-rise>
+              <h3 data-i18n="price.stay">Pobyt</h3>
+              <dl data-price-stay></dl>
+            </div>
+            <div class="price__col" data-rise>
+              <h3 data-i18n="price.extras">Příplatky</h3>
+              <dl data-price-extra></dl>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== REZERVACE ========== -->
+      <section class="section section--soft" id="rezervace">
+        <div class="shell">
+          <div class="section__head">
+            <p class="eyebrow" data-rise data-i18n="book.eyebrow">Rezervace</p>
+            <h2 data-rise data-i18n="book.title">Vyberte termín</h2>
+            <p class="lede" data-rise>
+              Klepnutím vyberte příjezd a odjezd. Cena se spočítá po nocích podle sezóny,
+              hned jak rozsah označíte.
+            </p>
+          </div>
+
+          <div class="book">
+            <div class="card" data-rise>
+              <div class="cal__top">
+                <button class="cal__step" type="button" data-cal-prev data-i18n-attr="aria-label:book.prev" aria-label="Předchozí měsíc">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M10 3 5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </button>
+                <p class="eyebrow" data-cal-label>Vyberte termín</p>
+                <button class="cal__step" type="button" data-cal-next data-i18n-attr="aria-label:book.next" aria-label="Další měsíc">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="m6 3 5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </button>
+              </div>
+
+              <div class="cal__months" data-cal></div>
+            </div>
+
+            <div class="card sum" data-rise>
+              <div class="sum__range">
+                <div>
+                  <span data-i18n="book.from">Příjezd</span>
+                  <b data-sum-from>—</b>
+                </div>
+                <svg class="sum__arrow" width="20" height="12" viewBox="0 0 20 12" fill="none" aria-hidden="true">
+                  <path d="M0 6h18m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <div style="text-align: right">
+                  <span data-i18n="book.to">Odjezd</span>
+                  <b data-sum-to>—</b>
+                </div>
+              </div>
+
+              <div data-sum-body>
+                <p class="sum__empty">Vyberte termín v kalendáři a zobrazí se rozpis ceny po sezónách.</p>
+              </div>
+
+              <form class="form" data-form hidden>
+                <div class="field field--row">
+                  <div class="field">
+                    <label for="jmeno" data-i18n="book.name">Jméno</label>
+                    <input id="jmeno" name="jmeno" required autocomplete="name" data-i18n-attr="placeholder:book.namePh" placeholder="Jana Nováková" />
+                  </div>
+                  <div class="field">
+                    <label for="osoby" data-i18n="book.guests">Osob</label>
+                    <select id="osoby" name="osoby" data-guests>
+                      <option>1</option>
+                      <option>2</option>
+                      <option selected>3</option>
+                      <option>4</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="email" data-i18n="book.email">E-mail</label>
+                  <input id="email" name="email" type="email" required autocomplete="email" data-i18n-attr="placeholder:book.emailPh" placeholder="jana@email.cz" />
+                </div>
+                <div class="field">
+                  <label for="zprava" data-i18n="book.note">Poznámka</label>
+                  <textarea id="zprava" name="zprava" rows="3" data-i18n-attr="placeholder:book.notePh" placeholder="Sauna, pozdní příjezd, cokoliv…"></textarea>
+                </div>
+                <button class="btn btn--solid" type="submit" data-i18n="book.send">Odeslat poptávku</button>
+                <p class="sum__note" data-i18n="book.disclaimer">
+                  Odesláním se termín nerezervuje závazně. Ozveme se s potvrzením a konečnou cenou.
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== KONTAKT ========== -->
+      <section class="section" id="kontakt">
+        <div class="shell">
+          <div class="section__head">
+            <p class="eyebrow" data-rise data-i18n="contact.eyebrow">Kontakt</p>
+            <h2 data-rise data-i18n="contact.title">Kde nás najdete</h2>
+          </div>
+
+          <div class="contact">
+            <div class="contact__map" data-rise>
+              <iframe
+                data-i18n-attr="title:contact.map" title="Mapa — Podkozí 398"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=14.1074%2C50.0461%2C14.1154%2C50.0491&layer=mapnik&marker=50.047615%2C14.111439"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+
+            <dl class="contact__rows" data-rise>
+              <div class="contact__row"><dt data-i18n="contact.address">Adresa</dt><dd>Podkozí 398, 266 01</dd></div>
+              <div class="contact__row">
+                <dt data-i18n="contact.phone">Telefon</dt>
+                <dd><a href="tel:+420777063351">+420 777 063 351</a></dd>
+              </div>
+              <div class="contact__row">
+                <dt data-i18n="contact.email">E-mail</dt>
+                <dd><a href="mailto:paloucekpodkozi@gmail.com">paloucekpodkozi@gmail.com</a></dd>
+              </div>
+              <div class="contact__row">
+                <dt>Instagram</dt>
+                <dd><a href="https://www.instagram.com/na_paloucku_/" rel="noreferrer">na_paloucku_</a></dd>
+              </div>
+              <div class="contact__row"><dt data-i18n="contact.account">Číslo účtu</dt><dd>2922136173/0800</dd></div>
+            </dl>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <div class="shell foot__in">
+        <span class="brand">Na paloučku</span>
+        <span>Podkozí 398, 266 01 &middot; +420 777 063 351</span>
+        <span data-i18n="foot.rights">&copy; 2026 Na paloučku</span>
+      </div>
+    </footer>
+
+    <!-- lightbox -->
+    <div class="lb" data-lb role="dialog" aria-modal="true" data-i18n-attr="aria-label:lb.title" aria-label="Galerie" hidden>
+      <button class="lb__close" type="button" data-lb-close data-i18n-attr="aria-label:lb.close" aria-label="Zavřít galerii">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="m4 4 10 10M14 4 4 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        </svg>
+      </button>
+      <div class="lb__bar">
+        <button class="lb__nav" type="button" data-lb-prev data-i18n-attr="aria-label:lb.prev" aria-label="Předchozí fotka">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M10 3 5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+        <span class="lb__count" data-lb-count></span>
+        <button class="lb__nav" type="button" data-lb-next data-i18n-attr="aria-label:lb.next" aria-label="Další fotka">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="m6 3 5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
