@@ -69,7 +69,6 @@ const EXTRAS = [
   ['x.fire', 'x.fireNote'],
   ['x.restaurant', 'x.restaurantNote'],
   ['x.trails', 'x.trailsNote'],
-  ['x.vouchers', 'x.vouchersNote'],
 ];
 
 /**

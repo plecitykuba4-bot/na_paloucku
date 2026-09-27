@@ -129,8 +129,6 @@ const DICT = {
     'x.restaurantNote': 'Rodinná, kousek pěšky',
     'x.trails': 'Turistika a cyklo',
     'x.trailsNote': 'Trasy začínají za plotem',
-    'x.vouchers': 'Dárkové poukazy',
-    'x.vouchersNote': 'Na pobyt i na wellness',
 
     'paid.sauna': 'Privátní sauna',
     'paid.saunaNote': '2 hodiny',
@@ -282,8 +280,6 @@ const DICT = {
     'x.restaurantNote': 'Familiär, wenige Schritte entfernt',
     'x.trails': 'Wandern und Radfahren',
     'x.trailsNote': 'Wege beginnen hinter dem Zaun',
-    'x.vouchers': 'Geschenkgutscheine',
-    'x.vouchersNote': 'Für Aufenthalt und Wellness',
 
     'paid.sauna': 'Private Sauna',
     'paid.saunaNote': '2 Stunden',
@@ -434,8 +430,6 @@ const DICT = {
     'x.restaurantNote': 'Family-run, a short walk',
     'x.trails': 'Walking and cycling',
     'x.trailsNote': 'Routes start behind the fence',
-    'x.vouchers': 'Gift vouchers',
-    'x.vouchersNote': 'For stays and wellness',
 
     'paid.sauna': 'Private sauna',
     'paid.saunaNote': '2 hours',
