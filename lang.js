@@ -465,7 +465,16 @@ const DICT = {
   },
 };
 
-export const LANGS = ['cs', 'de', 'en'];
+/**
+ * Zapnuté jazyky.
+ *
+ * Němčinu a angličtinu psala AI a než je přečte někdo, kdo tím jazykem
+ * mluví, web jede jen česky. Slovníky níž i přepínač v hlavičce zůstávají
+ * hotové — zapnutí je tenhle jeden řádek:
+ *
+ *   export const LANGS = ['cs', 'de', 'en'];
+ */
+export const LANGS = ['cs'];
 
 let current = 'cs';
 const listeners = new Set();

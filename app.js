@@ -706,6 +706,17 @@ function mountLangs() {
   const pill = $('[data-lang-pill]');
   if (!box || !pill) return;
 
+  // Jeden jazyk = není co přepínat. Tlačítka zůstávají v HTML, jen se
+  // neukazují, takže zapnutí dalšího jazyka nevyžaduje sahat do sazby.
+  if (LANGS.length < 2) {
+    box.remove();
+    return;
+  }
+
+  for (const btn of [...box.querySelectorAll('[data-lang-btn]')]) {
+    if (!LANGS.includes(btn.dataset.langBtn)) btn.remove();
+  }
+
   const place = () => {
     const on = box.querySelector('[aria-pressed="true"]');
     if (!on) return;
