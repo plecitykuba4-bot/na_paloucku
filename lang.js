@@ -33,7 +33,7 @@ const DICT = {
     'about.p1':
       'Na paloučku je útulný dřevěný domeček až pro čtyři osoby s venkovní vířivkou a možností pronajmutí privátní sauny. Uvnitř kamna na dřevo, spaní v podkroví a okna do luk.',
     'about.p2':
-      'V blízkosti najdete rodinnou restauraci Srub Podkozí. Na zahradě je ohniště a k dostání jsou dárkové poukazy.',
+      'V blízkosti najdete rodinnou restauraci Srub Podkozí. Na zahradě je ohniště.',
     'about.p3':
       'Jsme na dosah od CHKO Křivoklátsko a povodí Berounky, s turistickými i cyklistickými trasami hned za plotem.',
 
@@ -186,7 +186,7 @@ const DICT = {
     'about.p1':
       'Na paloučku ist ein gemütliches Holzhaus für bis zu vier Personen mit Außen-Whirlpool und der Möglichkeit, eine private Sauna zu mieten. Drinnen ein Holzofen, Schlafplatz unter dem Dach und Fenster zur Wiese.',
     'about.p2':
-      'In der Nähe finden Sie das Familienrestaurant Srub Podkozí. Im Garten gibt es eine Feuerstelle, Geschenkgutscheine sind erhältlich.',
+      'In der Nähe finden Sie das Familienrestaurant Srub Podkozí. Im Garten gibt es eine Feuerstelle.',
     'about.p3':
       'Wir liegen nah am Landschaftsschutzgebiet Křivoklátsko und am Fluss Berounka, Wander- und Radwege beginnen direkt hinter dem Zaun.',
 
@@ -338,7 +338,7 @@ const DICT = {
     'about.p1':
       'Na paloučku is a snug wooden cabin for up to four guests with an outdoor hot tub and the option of renting a private sauna. Inside there is a wood stove, a sleeping loft and windows onto the meadow.',
     'about.p2':
-      'The family restaurant Srub Podkozí is nearby. There is a fire pit in the garden, and gift vouchers are available.',
+      'The family restaurant Srub Podkozí is nearby. There is a fire pit in the garden.',
     'about.p3':
       'We are close to the Křivoklátsko protected landscape and the Berounka river, with walking and cycling routes starting right behind the fence.',
 
